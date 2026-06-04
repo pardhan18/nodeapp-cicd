@@ -36,7 +36,7 @@ pipeline {
     stage('Deploy to EC2') {
       steps {
         sh '''
-          ssh -i /root/.ssh/pardhan.pem -o StrictHostKeyChecking=no ec2-user@$APP_SERVER "
+          ssh -i /var/jenkins_home/.ssh/pardhan.pem -o StrictHostKeyChecking=no ec2-user@$APP_SERVER "
             aws ecr get-login-password --region us-east-1 \
               | docker login --username AWS --password-stdin $ECR_URL
             docker pull $ECR_URL/$IMAGE_NAME:latest
